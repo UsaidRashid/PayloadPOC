@@ -4,6 +4,7 @@ import React from 'react'
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
+import { cn } from '@/utilities/cn'
 
 export const PostHero: React.FC<{
   post: Post
@@ -11,8 +12,12 @@ export const PostHero: React.FC<{
   const { categories, meta: { image: metaImage } = {}, populatedAuthors, publishedAt, title } = post
 
   return (
-    <div className="relative -mt-[20rem] flex items-end">
-      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr]  pb-8">
+    <div className="relative flex items-end">
+      <div
+        className={cn('container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr]  pb-8', {
+          'text-white': metaImage,
+        })}
+      >
         <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
           <div className="uppercase text-sm mb-6">
             {categories?.map((category, index) => {
@@ -77,15 +82,18 @@ export const PostHero: React.FC<{
           </div>
         </div>
       </div>
-      <div className="min-h-[80vh] select-none">
+      <div className="min-h-[40dvh] select-none">
         {metaImage && typeof metaImage !== 'string' && (
-          <Media
-            fill
-            priority={false}
-            loading="lazy"
-            imgClassName="-z-10 object-cover"
-            resource={metaImage}
-          />
+          <>
+            <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
+            <Media
+              fill
+              priority={false}
+              loading="lazy"
+              imgClassName="-z-10 object-cover"
+              resource={metaImage}
+            />
+          </>
         )}
         {/* <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" /> */}
       </div>
