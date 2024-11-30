@@ -16,6 +16,7 @@ type Props = MediaBlockProps & {
   imgClassName?: string
   staticImage?: StaticImageData
   disableInnerContainer?: boolean
+  align?: string | null
 }
 
 export const MediaBlock: React.FC<Props> = (props) => {
@@ -27,6 +28,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
     media,
     staticImage,
     disableInnerContainer,
+    align,
   } = props
 
   let caption
@@ -38,20 +40,28 @@ export const MediaBlock: React.FC<Props> = (props) => {
         '',
         {
           container: enableGutter,
+          'flex  gap-x-2 items-center *:flex-1 *:shrink-0': align !== null,
+          'flex-row-reverse': align === 'right',
         },
         className,
       )}
     >
       <Media
-        imgClassName={cn('border border-border rounded-[0.8rem]', imgClassName)}
+        imgClassName={cn(
+          'border border-border rounded-[0.8rem] ',
+          {
+            'w-[50%] object-cover': align !== null,
+          },
+          imgClassName,
+        )}
         resource={media}
         src={staticImage}
       />
       {caption && (
         <div
           className={cn(
-            'mt-6',
             {
+              'mt-6': align === null,
               container: !disableInnerContainer,
             },
             captionClassName,

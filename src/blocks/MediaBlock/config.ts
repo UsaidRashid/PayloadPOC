@@ -10,5 +10,20 @@ export const MediaBlock: Block = {
       relationTo: 'media',
       required: true,
     },
+    {
+      label: 'Alignment',
+      name: 'align',
+      type: 'select',
+      options: [
+        {
+          label: 'None',
+          //@ts-expect-error
+          value: null,
+        },
+        { label: 'Right', value: 'right' },
+        { label: 'Left', value: 'left' },
+      ],
+      defaultValue: null,
+    },
   ],
 }
