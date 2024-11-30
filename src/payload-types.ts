@@ -304,6 +304,7 @@ export interface ContentBlock {
  */
 export interface MediaBlock {
   media: string | Media;
+  align?: null | 'right' | 'left';
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaBlock';
@@ -847,6 +848,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               media?: T;
+              align?: T;
               id?: T;
               blockName?: T;
             };
