@@ -33,8 +33,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ header }) => {
     <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
       <div className="py-8 border-b border-border flex justify-between">
         <Link href="/">
-          {/* <Logo loading="eager" priority="high" className="invert dark:invert-0" /> */}
-          Edunova
+          <Logo loading="eager" priority="high" className="" />
+          <span className="sr-only">Edunova logo</span>
         </Link>
         <HeaderNav header={header} />
       </div>
