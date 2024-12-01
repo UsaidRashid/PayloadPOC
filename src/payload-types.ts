@@ -412,7 +412,21 @@ export interface Post {
 export interface User {
   id: string;
   name?: string | null;
-  role: 'admin' | 'user';
+  role: 'admin' | 'editor' | 'user';
+  customAccess?: {
+    pages?: {
+      create?: ('yes' | 'no' | 'isOwner') | null;
+      read?: ('yes' | 'no' | 'isOwner') | null;
+      update?: ('yes' | 'no' | 'isOwner') | null;
+      delete?: ('yes' | 'no' | 'isOwner') | null;
+    };
+    posts?: {
+      create?: ('yes' | 'no' | 'isOwner') | null;
+      read?: ('yes' | 'no' | 'isOwner') | null;
+      update?: ('yes' | 'no' | 'isOwner') | null;
+      delete?: ('yes' | 'no' | 'isOwner') | null;
+    };
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1026,6 +1040,26 @@ export interface CategoriesSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
   role?: T;
+  customAccess?:
+    | T
+    | {
+        pages?:
+          | T
+          | {
+              create?: T;
+              read?: T;
+              update?: T;
+              delete?: T;
+            };
+        posts?:
+          | T
+          | {
+              create?: T;
+              read?: T;
+              update?: T;
+              delete?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;
