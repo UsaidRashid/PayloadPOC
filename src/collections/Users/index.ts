@@ -1,7 +1,7 @@
 import type { CollectionConfig, Field } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
-import { isAdmin, isAdminOrEditor, isAdminOrSelf } from '@/utilities/auth'
+import { isAdmin, isAdminOrEditor, isAdminOrEditorFilter, isAdminOrSelf } from '@/utilities/auth'
 
 const rbacOptions = [
   { label: 'Yes', value: 'yes' },
@@ -41,7 +41,7 @@ export const Users: CollectionConfig = {
     admin: isAdminOrEditor,
     create: isAdmin,
     delete: isAdmin,
-    read: authenticated,
+    read: isAdminOrEditorFilter,
     update: isAdminOrSelf,
   },
   admin: {
